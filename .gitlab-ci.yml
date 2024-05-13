@@ -1,0 +1,26 @@
+before_script:
+  - cd $(init-java-beta-docker -g None)
+  - export PROJECT=$(echo $CI_COMMIT_TAG | cut -d '-' -f 2)
+ 
+stages:
+  - build
+  - deploy
+ 
+build:
+  stage: build
+  only:
+    - tags
+  script:
+    - ./deploy.sh -p $PROJECT -q --build-only
+  tags:
+    - build-runner
+
+pushImage:
+  stage: deploy
+  only:
+    - /^bk-.*$/
+    - /^rk-.*$/
+  script:
+    - bash ./push_image.sh
+  tags:
+    - build-runner

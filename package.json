@@ -1,0 +1,120 @@
+{
+  "name": "nestjs-boilerplate",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=18"
+  },
+  "description": "Boilerplate for NestJS-based project",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "dev": "npm run start:dev",
+    "start": "node dist/main.js",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "npx tsc --noEmit && eslint . --ext .js,.ts,.json --quiet",
+    "lint:fix": "eslint . --ext .js,.ts,.json --quiet --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prepare": "husky",
+    "sentry:sourcemaps:beta": "sentry-cli sourcemaps inject --org sentry --project np-nestjs-boilerplate ./dist && SENTRY_PROPERTIES=sentry.properties sentry-cli --url https://sentry-beta.corp.algento.com sourcemaps upload --org sentry --project np-nestjs-boilerplate ./dist",
+    "sentry:sourcemaps:production": "sentry-cli sourcemaps inject --org sentry --project np-nestjs-boilerplate ./dist && SENTRY_PROPERTIES=sentry.properties sentry-cli --url https://sentry-abucc.corp.algento.com sourcemaps upload --org sentry --project np-nestjs-boilerplate ./dist"
+  },
+  "dependencies": {
+    "@nestjs/axios": "^3.0.2",
+    "@nestjs/cache-manager": "^2.2.2",
+    "@nestjs/common": "^10.3.8",
+    "@nestjs/config": "^3.2.2",
+    "@nestjs/core": "^10.3.8",
+    "@nestjs/mapped-types": "^2.0.5",
+    "@nestjs/platform-express": "^10.3.8",
+    "@nestjs/sequelize": "^10.0.1",
+    "@nestjs/swagger": "^7.3.1",
+    "@sentry/cli": "^2.31.0",
+    "@sentry/tracing": "^7.112.2",
+    "@types/response-time": "^2.3.8",
+    "axios": "^1.6.8",
+    "cache-manager": "^5.5.1",
+    "cache-manager-redis-store": "^2.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "cls-rtracer": "^2.6.3",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "global-tld-list": "^1.14.24",
+    "http-status-codes": "^2.3.0",
+    "husky": "^9.0.11",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.7",
+    "redis": "^4.6.13",
+    "randomstring": "^1.3.0",
+    "reflect-metadata": "^0.2.2",
+    "response-time": "^2.3.2",
+    "rxjs": "^7.8.1",
+    "sequelize": "^6.37.3",
+    "sequelize-typescript": "^2.1.6",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "winston-transport": "^4.7.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.3.2",
+    "@nestjs/schematics": "^10.1.1",
+    "@nestjs/testing": "^10.3.8",
+    "@sentry/node": "^7.112.2",
+    "@types/cache-manager-redis-store": "^2.0.4",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.7",
+    "@types/sequelize": "^4.28.20",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "prom-client": "^15.1.2",
+    "source-map-support": "^0.5.21",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.1.2",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "./prepare-commit-msg.sh $HUSKY_GIT_PARAMS"
+    }
+  }
+}
