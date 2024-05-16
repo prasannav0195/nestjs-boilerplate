@@ -175,7 +175,8 @@ module.exports = {
         'node/no-extraneous-import': 'off',
         'no-useless-constructor': 'off',
         'no-empty-function': 'off',
-        'max-classes-per-file': 'off'
+        'max-classes-per-file': 'off',
+        "import/prefer-default-export": "off"
     },
     overrides: [
         {

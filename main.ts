@@ -14,7 +14,6 @@ async function startServer(): Promise<void> {
     const port = configService.get('PORT');
 
     loaders(app);
-
     await app.listen(port);
     loggerService.log(`Server started at ${port} with config: ${JSON.stringify(configService)}`);
 }

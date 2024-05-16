@@ -1,9 +1,9 @@
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 import { Injectable, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Sequelize } from 'sequelize-typescript';
 
 import LoggerService from '@app/common/logger/logger.service';
+import { PrismaService } from '@app/common/prisma/prisma.service';
 
 import { HealthCheckResponse } from './health.types';
 
@@ -12,16 +12,18 @@ export default class HealthService {
     constructor(
     private readonly logger: LoggerService,
     private configService: ConfigService,
-    private sequelize: Sequelize,
+    private prismaService: PrismaService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache
     ) {}
 
     async getDbHealthStatus(): Promise<string> {
         try {
-            await this.sequelize.authenticate();
+            // await this.prismaService.();
+            console.log('');
 
             return 'ok';
         } catch (err) {
+            console.log(err);
             this.logger.error('Unable to connect to the database:', err);
 
             return 'forbid';

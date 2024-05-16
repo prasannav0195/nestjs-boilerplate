@@ -1,17 +1,27 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { Prisma, User } from '@prisma/client';
 
-import { IUser } from '../types';
-
-import User from './models/user.entity';
+import { PrismaService } from '@app/common/prisma/prisma.service';
 
 @Injectable()
 export default class IoService {
     constructor(
-        @Inject('UserRepository')
-        private userRepository: typeof User
+        private prisma: PrismaService
     ) {}
 
-    async getAllUsers(): Promise<IUser[]> {
-        return this.userRepository.findAll();
+    async getAllUsers(): Promise<User[]> {
+        try {
+            const users = this.prisma.user.findMany();
+
+            return users;
+        } catch (err) {
+            console.log(err);
+
+            return [];
+        }
+    }
+
+    async createUser(data: Prisma.UserCreateInput): Promise<User> {
+        return this.prisma.user.create({ data });
     }
 }

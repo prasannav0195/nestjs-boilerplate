@@ -3,7 +3,9 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { JwtGuard } from '@common/guards';
+// import { JwtGuard } from '@common/guards';
+
+import { JwtGuard } from '@app/common/guards';
 
 import { IUser } from './types';
 import UsersService from './users.service';
@@ -16,13 +18,13 @@ export default class UsersController {
 
     @Get()
     @UseGuards(JwtGuard)
-    async getAllUsers(): Promise<IUser[]> {
+    async getAllUsers(): Promise<any> {
         return this.usersService.getAllUsers();
     }
 
     @Post()
     @UseGuards(JwtGuard)
-    createUser(@Body() userDto: UserDto): UserDto {
-        return userDto;
+    createUser(@Body() userDto: UserDto): Promise<IUser> {
+        return this.usersService.createUser(userDto);
     }
 }
